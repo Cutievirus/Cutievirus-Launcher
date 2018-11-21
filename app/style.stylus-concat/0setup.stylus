@@ -1,0 +1,53 @@
+$dark = #383333
+$pink = #eaa
+$red = #a94e4e
+
+$column
+    display: flex
+    flex-flow: column
+
+$row
+    display: flex
+    flex-flow: row
+
+$cover
+    content: ' '
+    position: absolute
+    width: 100%; height: 100%
+    left: 0; top: 0
+    pointer-events: none
+
+$glass
+    position: relative;
+    &:after
+        @extends $cover
+        background-image:
+        linear-gradient(#fff0 -10%, #fff1 50%,#fff0 50%)
+
+
+@font-face
+    font-family: "teenidle"
+    src: url("fonts/TeenIdle.ttf")
+
+@media (min-width: 90rem)
+    html
+        font-size: 1.15vw
+
+html, body, #vue
+    height: 100%
+    overflow: hidden
+body
+    margin: 0
+    user-select none
+    box-sizing: border-box
+    font-family: "Trebuchet MS", sans-serif
+    font-size: 1rem
+    border: 0.125rem solid $dark
+    &.maximized
+        border: none
+#vue
+    @extends $column
+
+img
+    user-drag: none
+    -webkit-user-drag: none;

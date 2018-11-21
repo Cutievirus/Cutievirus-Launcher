@@ -1,0 +1,51 @@
+
+main 
+    flex-grow: 1
+    padding: 1rem
+    background-color: white
+    color: $dark
+    @extends $column
+    max-width: 50rem
+    margin: 0 auto
+    @media (max-width: 50rem)
+        padding: 1vw
+    @media (max-width: 40rem)
+        font-size: 0.95em
+    #game-info
+        flex-grow: 1
+        overflow-y: scroll
+        overflow-x: hidden
+        margin-bottom: 1rem
+    #game-banner img 
+        width: 100%
+    #game-gallery
+        float: right
+        width: 10rem
+        max-width: 20%
+        z-index: 11;
+        position: relative
+        padding-left: 0.5rem
+        height: var(--height);
+        overflow: hidden;
+        overflow-y: scroll;
+        img
+            display:block
+            max-width: 100%
+            cursor: pointer
+            transition: transform 0.0625s
+            &+img 
+                margin-top: 0.2rem
+            &:hover
+                transform: scale(1.1)
+        &::-webkit-scrollbar
+            width: 0
+            background: transparent
+    button 
+        @extends $glass
+        border: 0.0625rem solid $dark
+        background-color: $dark
+        background-image: linear-gradient(#fff0 -10%,#fff3 10%,#fff0)
+        color: white
+        transition: background-color 0.25s
+        &:hover
+            background-color: lighten($dark,10)

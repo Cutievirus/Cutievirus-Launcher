@@ -1,0 +1,38 @@
+{
+  "name": "cutievirus-launcher",
+  "version": "0.0.0",
+  "description": "Launcher for Cutievirus games.",
+  "author": "Dread",
+  "license": "UNLICENSED",
+  "main": "app/main.js",
+  "devDependencies": {
+    "electron": "^3.0.2",
+    "electron-builder": "^20.36.2",
+    "fs-extra": "^7.0.1",
+    "glob": "^7.1.3",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-stylus": "^2.7.0",
+    "gulp-util": "^3.0.8",
+    "merge-stream": "^1.0.1"
+  },
+  "dependencies": {
+    "electron-updater": "^3.1.2",
+    "electron-is-dev": "^1.0.1"
+  },
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cutievirus/Cutievirus-Launcher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Cutievirus/Cutievirus-Launcher/issues"
+  },
+  "homepage": "https://github.com/Cutievirus/Cutievirus-Launcher#readme"
+}

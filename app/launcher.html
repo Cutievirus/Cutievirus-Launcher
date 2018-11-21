@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cutievirus Launcher</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="vue">
+	<header>
+		<img id="logo" src="favicon.png">
+		<div id="controls">
+            <control-button @click="minimize">-</control-button>
+			<control-button @click="maximize">+</control-button>
+			<control-button @click="close">×</control-button>
+		</div>
+	</header>
+	<div id="content">
+		<aside>
+			<nav>
+                <game-button
+                    v-for="game in games"
+                    :game=game
+                    :key=game.id
+                />
+            </nav>
+		</aside>
+		<main>
+			<div id="game-info">
+				<div id="game-banner" v-if="game.banner">
+					<img :src="game.banner" :alt="game.name">
+				</div>
+				<div id="game-gallery" v-if="game.gallery && game.gallery.length">
+					<img
+						v-for="img in game.gallery"
+						:src=img
+						@click="lightboxImage=img"
+						onclick="document.body.classList.add('lightbox')"
+						onload="resizeGallery()"
+					/>
+				</div>
+				<div id="game-summary" v-html="game.text"></div>
+			</div>
+			<div id="downloader">
+				<button id="download-button">Download</button>
+				<div id="download-bar">
+					<div id="download-progress"></div>
+					<span></span>
+				</div>
+			</div>
+		</main>
+		<div id="lightbox"
+			onclick="document.body.classList.remove('lightbox')"
+			@click="lightboxImage=null"
+		>
+			<img v-if="lightboxImage" :src="lightboxImage" />
+		</div>
+	</div>
+    <footer></footer>
+</div>
+<script src="vue.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

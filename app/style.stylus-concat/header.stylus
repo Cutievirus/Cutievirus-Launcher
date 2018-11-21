@@ -1,0 +1,43 @@
+header 
+    @extends $glass
+    -webkit-app-region: drag
+    background-color: $dark
+    position: relative
+    z-index: 20
+    button
+        -webkit-app-region: no-drag
+    #logo 
+        width: 5rem
+        padding: .5rem 1rem 0
+        margin-bottom: -1rem;
+        pointer-events: none
+
+footer 
+    background-color: $dark
+    color: white
+    padding: .3rem 1rem .25rem
+
+#content
+    @extends $row
+    flex-grow: 1
+    padding-top: .5rem
+    position: relative
+    background-color: $pink
+
+// control buttons
+button
+    background: transparent
+    border: none 
+    outline: none 
+    font-family: "Trebuchet MS", sans-serif;
+
+#controls
+    float: right 
+    button
+        transition: background-color 0.125s
+        background: $dark
+        color: white 
+        padding: 0.5rem 0.8rem
+        font-size: 1.2rem
+        &:hover
+            background-color: lighten($dark,5)
