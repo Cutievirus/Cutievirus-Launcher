@@ -6,16 +6,16 @@
   "license": "UNLICENSED",
   "main": "app/main.js",
   "build": {
-    "addId": "com.cutievirus.launcher",
+    "appId": "com.cutievirus.launcher",
     "productName": "Cutievirus Launcher",
     "mac": {
       "category": "public.app-category.games"
     },
     "publish": {
-      "provider":"github",
-      "releaseType":"draft",
-      "owner":"Cutievirus",
-      "repo":"cutievirus-launcher"
+      "provider": "github",
+      "releaseType": "draft",
+      "owner": "Cutievirus",
+      "repo": "cutievirus-launcher"
     }
   },
   "devDependencies": {
@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "electron-is-dev": "^1.0.1",
-    "electron-updater": "^3.1.2",
+    "electron-updater": "^4.0.0",
     "fs-extra": "^7.0.1",
     "import-lazy": "^3.1.0",
     "lodash": "^4.17.11",
