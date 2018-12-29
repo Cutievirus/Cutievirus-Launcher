@@ -1,0 +1,1 @@
+electron-builder build --win --x64 -p always

@@ -82,24 +82,24 @@ app.on('ready', ()=>{
 
 });
 
-autoUpdater.on('error',event=>{
-	log.error(event.error);
-	launcher.send('updaterText',event.error.message);
+autoUpdater.on('error',error=>{
+	log.error(error);
+	launcher.send('updaterText',error.message);
 });
-autoUpdater.on('checking-for-update',event=>{
+autoUpdater.on('checking-for-update',()=>{
 	launcher.send('updaterText',"Checking for update...");
 });
-autoUpdater.on('update-available',event=>{
-	launcher.send('updaterText',"Found update "+event.info.version);
+autoUpdater.on('update-available',info=>{
+	launcher.send('updaterText',"Found update "+info.version);
 });
-autoUpdater.on('update-not-available',event=>{
+autoUpdater.on('update-not-available',info=>{
 	launcher.send('updaterText',"");
 });
 autoUpdater.on('download-progress',event=>{
-	launcher.send('updaterText',"Downloading update "+event.percent*100+"%");
+	launcher.send('updaterText',"Downloading update "+Math.floor(event.percent*10)/10+"%");
 });
-autoUpdater.on('update-downloaded',event=>{
-	launcher.send('updaterText',"Downloaded update "+event.info.version
+autoUpdater.on('update-downloaded',info=>{
+	launcher.send('updaterText',"Downloaded update "+info.version
 	+" <button onclick='vue.quitandinstallupdate()'>Quit and Install</button>");
 });
 
