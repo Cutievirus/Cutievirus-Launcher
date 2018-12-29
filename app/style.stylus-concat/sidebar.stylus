@@ -62,3 +62,9 @@ aside
                     @extends $cover
                     z-index: -1
                     opacity: 0.5
+    #version
+        font-family: Consolas,monospace
+        font-size: 0.75rem
+        color: #fffa
+        position:absolute
+        bottom:0

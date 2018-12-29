@@ -45,6 +45,7 @@ Downloader=method=>async function(game){
 const vue = new Vue({ 
 	el:'#vue',
 	data:{
+        version:remote.app.getVersion(),
         games:[],
         game:{},
         lightboxImage:null,
