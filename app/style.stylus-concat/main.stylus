@@ -16,6 +16,10 @@ main
         overflow-y: scroll
         overflow-x: hidden
         margin-bottom: 1rem
+        &::-webkit-scrollbar
+            width: 1rem
+        &::-webkit-scrollbar-thumb
+            box-shadow: inset -.5rem 0 lightgray
     #game-banner img 
         width: 100%
     #game-gallery
@@ -28,6 +32,7 @@ main
         height: var(--height);
         overflow: hidden;
         overflow-y: scroll;
+        overflow-y: overlay;
         img
             display:block
             max-width: 100%
@@ -38,8 +43,12 @@ main
             &:hover
                 transform: scale(1.1)
         &::-webkit-scrollbar
-            width: 0
-            background: transparent
+            width: 0.6rem
+        &::-webkit-scrollbar-thumb
+            box-shadow: inset -.3rem 0 lightgray
+        body.lightbox &
+            &::-webkit-scrollbar-thumb
+                box-shadow: inset -.3rem 0 rgba(lightgray,0.4)
     button 
         @extends $glass
         border: 0.0625rem solid $dark

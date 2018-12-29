@@ -21,3 +21,16 @@ body.lightbox
         width: 20%
         overflow-y: scroll
         overflow-x: hidden
+
+#loadbox
+    @extends $cover
+    z-index: 10
+    pointer-events: auto
+    background-color: $dark
+    color: white
+    #loadtext
+        display: inline-block
+        position:relative
+        left: 50%; top: 50%
+        transform: translate(-50%, -50%)
+        font-family: teenidle

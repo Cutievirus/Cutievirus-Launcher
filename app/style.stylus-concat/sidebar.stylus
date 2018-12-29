@@ -8,6 +8,11 @@ aside
     font-family: teenidle 
     font-size: 1.3rem
     flex-shrink: 0
+    overflow-y: auto
+    &::-webkit-scrollbar
+        width: 0.6rem
+    &::-webkit-scrollbar-thumb
+        box-shadow: inset 0.35rem 0 lighten($pink,10)
     @media (max-width: 50rem)
         padding: 0.5em
         width: 28%

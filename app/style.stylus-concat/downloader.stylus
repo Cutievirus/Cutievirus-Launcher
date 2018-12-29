@@ -3,7 +3,8 @@
     @extends $row
     flex-shrink: 0
 
-    #download-button
+    button
+        height: 2.75rem
         font-size: 100%;
         padding: 0.7rem 0.5rem
         font-weight: bold
@@ -11,6 +12,7 @@
 
     #download-bar
         @extends $glass
+        height: 2.75rem
         flex-grow: 1;
         background-color: $dark
         background-image: linear-gradient(#fff0,#ffffff19);
@@ -29,7 +31,8 @@
             background-color: $pink2
             background-image: linear-gradient(transparent -10%, lighten($pink2,20) 10%,transparent)
             height: 100%
-            width: 10%
+            width: calc(var(--percent,0)*100%)
+            transition: width 1s
             box-shadow: 0 0 2rem 1rem $dark
             overflow: hidden
             position: relative

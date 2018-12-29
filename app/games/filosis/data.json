@@ -1,6 +1,12 @@
 {
 	"name":"Super Filovirus Sisters",
-	"url":"https://github.com/Cutievirus/filosis.git",
+	"repo":"Cutievirus/filosis",
 	"subdir":"play",
-	"priority":100
+	"priority":100,
+	"width": 640,
+	"height":480,
+	"minwidth":320,
+	"minheight":240,
+	"resizable":true,
+	"session":"persist:cutievirus"
 }

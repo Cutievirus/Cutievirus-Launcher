@@ -37,31 +37,47 @@
 					<img
 						v-for="img in game.gallery"
 						:src=img
-						@click="lightboxImage=img"
-						onclick="document.body.classList.add('lightbox')"
+						@click="showLightbox(img)"
 						onload="resizeGallery()"
 					/>
 				</div>
 				<div id="game-summary" v-html="game.text"></div>
 			</div>
-			<div id="downloader">
-				<button id="download-button">Download</button>
-				<div id="download-bar">
-					<div id="download-progress"></div>
-					<span></span>
+			<div id="downloader" v-cloak v-if="!_.isEmpty(game)">
+				<button
+					id="download-button"
+					v-if="!game.installed && !game.downloading"
+					@click="downloadGame(game)"
+				>Download</button>
+				<button
+					v-if="game.installed"
+					@click="playGame(game)"
+				>Play</button>
+				<button
+					v-if="game.installed && game.update"
+					@click="updateGame(game)"
+				>Update</button>
+				<div id="download-bar" v-if="game.downloading">
+					<div id="download-progress"
+						:style="{'--percent':game.downloadProgress}"
+					></div>
+					<span v-text="game.downloadMessage"></span>
 				</div>
 			</div>
 		</main>
-		<div id="lightbox"
-			onclick="document.body.classList.remove('lightbox')"
-			@click="lightboxImage=null"
+		<div id="lightbox" v-cloak
+			@click="hideLightbox()"
 		>
 			<img v-if="lightboxImage" :src="lightboxImage" />
 		</div>
+		<div id="loadbox"  v-if="games.length===0">
+			<div id="loadtext" v-text="`Loading... Please wait.`"></div>
+		</div>
 	</div>
-    <footer></footer>
+    <footer v-html="updaterText"></footer>
 </div>
-<script src="vue.js"></script>
 <script src="script.js"></script>
+<script src="vue.js"></script>
+<script>loadGames();</script>
 </body>
 </html>
