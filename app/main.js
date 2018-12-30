@@ -16,7 +16,13 @@ for (const level of ['error','warn','info','verbose','debug','silly']){
 	exports.log[level]=(...args)=>log[level](...args);
 }
 
-process.chdir(__dirname);
+let options = {
+	audoUpdate:false,
+	debugUpdater: false,
+}
+
+// doesn't work with asar.
+//process.chdir(__dirname);
 
 const dataDirectory = app.getPath("userData");
 const gameDirectory = path.resolve(dataDirectory,'games');
@@ -74,8 +80,8 @@ function openLauncher(){
 
 app.on('ready', ()=>{
 	openLauncher();
-	if(!debug){
-		autoUpdater.autoDownload=true;
+	if(!debug||options.debugUpdater){
+		autoUpdater.autoDownload=options.autoUpdate;
 		autoUpdater.autoInstallOnAppQuit=true;
 		autoUpdater.checkForUpdates();
 	}
@@ -90,7 +96,12 @@ autoUpdater.on('checking-for-update',()=>{
 	launcher.send('updaterText',"Checking for update...");
 });
 autoUpdater.on('update-available',info=>{
-	launcher.send('updaterText',"Found update "+info.version);
+	if(options.audoUpdate){
+		launcher.send('updaterText',"Found update "+info.version);
+	}else{
+		launcher.send('updaterText',"Update "+info.version+" available"
+		+" <button onclick='vue.downloadUpdate()'>Download</button>");
+	}
 });
 autoUpdater.on('update-not-available',info=>{
 	launcher.send('updaterText',"");
@@ -105,7 +116,12 @@ autoUpdater.on('update-downloaded',info=>{
 
 exports.quitandinstallupdate=()=>{
 	autoUpdater.quitAndInstall();
+	launcher.send('updaterText',"");
 };
+exports.downloadUpdate=()=>{
+	autoUpdater.downloadUpdate();
+	launcher.send('updaterText',"");
+}
 
 app.on('window-all-closed',()=>{
 	if(process.platform !== 'darwin'){

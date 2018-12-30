@@ -84,6 +84,9 @@ const vue = new Vue({
         },
         quitandinstallupdate(){
             mainProcess.quitandinstallupdate();
+        },
+        downloadUpdate(){
+            mainProcess.downloadUpdate();
         }
     }
 });
