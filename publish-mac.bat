@@ -1,1 +1,0 @@
-electron-builder build --mac -p always
