@@ -1,1 +1,1 @@
-electron-builder build -linux -p always
+electron-builder build --linux -p always

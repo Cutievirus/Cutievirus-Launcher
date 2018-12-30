@@ -1,1 +1,1 @@
-electron-builder build -mac -p always
+electron-builder build --mac -p always
