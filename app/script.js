@@ -9,6 +9,8 @@ const path = lazy('path');
 const log = mainProcess.log;
 const _ = lazy('lodash');
 
+const {sleep} = require('./utility');
+
 function alertError(err){
 	//dialog.showErrorBox('',err.stack);
 	log.error(err.stack);
@@ -211,8 +213,6 @@ function quitMessage(){
 	});
 	if(choice===1){ win.destroy(); }
 }
-
-sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 
 ipc.on('updaterText',(event,text)=>{
 	v.updaterText = text;

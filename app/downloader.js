@@ -7,15 +7,13 @@ const requestProgress = lazy('request-progress');
 const temp = lazy('temp').track();
 const yauzl = lazy('yauzl');
 const log = lazy('winston');
+const {longMessage} = require('./utility');
 
 function pathIsInside(child,parent){
     const relpath = path.relative(parent,child);
     if(!relpath || relpath.startsWith('..')){ return false; }
     return true;
 }
-
-const longMessage = (message,length=100) =>
-    message.length<=length ? message : message.substr(0,100)+'...'
 
 const downloadOptions = {
     headers:{'user-agent': 'cuteivirus-launcher'}

@@ -9,6 +9,7 @@ const lazy = require('import-lazy')(require);
 const fs = lazy('fs-extra');
 const path = lazy('path');
 const downloader = lazy('./downloader');
+const {longMessage} = require('./utility');
 const winston = lazy('winston');
 const log = winston;
 exports.log = {};
@@ -90,7 +91,7 @@ app.on('ready', ()=>{
 
 autoUpdater.on('error',error=>{
 	log.error(error);
-	launcher.send('updaterText',error.message);
+	launcher.send('updaterText',longMessage(error.message));
 });
 autoUpdater.on('checking-for-update',()=>{
 	launcher.send('updaterText',"Checking for update...");
