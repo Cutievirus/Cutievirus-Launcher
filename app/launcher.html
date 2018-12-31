@@ -58,7 +58,7 @@
 					@click="playGame(game)"
 				>Play</button>
 				<button
-					v-if="game.installed && game.update"
+					v-if="game.installed && game.update && !game.downloading"
 					@click="updateGame(game)"
 				>Update</button>
 				<div id="download-bar" v-if="game.downloading">

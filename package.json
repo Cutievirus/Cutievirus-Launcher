@@ -14,7 +14,7 @@
     },
     "publish": {
       "provider": "github",
-      "releaseType": "draft",
+      "releaseType": "release",
       "owner": "Cutievirus",
       "repo": "cutievirus-launcher"
     },
