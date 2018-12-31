@@ -1,6 +1,6 @@
 {
   "name": "cutievirus-launcher",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Launcher for Cutievirus games.",
   "author": "Dread",
   "license": "UNLICENSED",
@@ -8,7 +8,7 @@
   "build": {
     "appId": "com.cutievirus.launcher",
     "productName": "Cutievirus Launcher",
-    "asar": false,
+    "asar": true,
     "mac": {
       "category": "public.app-category.games"
     },
