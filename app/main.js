@@ -131,7 +131,7 @@ exports.quitandinstallupdate=()=>{
 };
 exports.downloadUpdate=()=>{
 	autoUpdater.downloadUpdate();
-	launcher.send('updaterText',"");
+	launcher.send('updaterText',"Downloading...");
 }
 
 app.on('window-all-closed',()=>{
