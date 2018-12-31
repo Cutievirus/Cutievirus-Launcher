@@ -27,9 +27,9 @@ script:
         -v ~/.cache/electron:/root/.cache/electron \
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
         electronuserland/builder:wine \
-        /bin/bash -c "electron-builder -wl"
+        /bin/bash -c "electron-builder -pwl"
     else
-      electron-builder -m
+      electron-builder -pm
     fi
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
