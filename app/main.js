@@ -54,12 +54,10 @@ winston.configure({
 let options = {
 	audoUpdate: false,
 	debugUpdater: false,
-	debug: require('electron-is-dev'),
+	debug: require('electron-is-dev')||process.env.CUTIEVIRUS_DEBUG,
+	production: !require('electron-is-dev'),
 }
-exports.isDebug=()=>options.debug;
-exports.setDebug=(value=true)=>{
-	options.debug=value;
-}
+exports.options=options;
 
 let package=null;
 fs.readFile(path.resolve(app.getAppPath(),'package.json'))
@@ -91,7 +89,7 @@ function openLauncher(){
 
 app.on('ready', ()=>{
 	openLauncher();
-	if(!options.debug||options.debugUpdater){
+	if(options.production||options.debugUpdater){
 		autoUpdater.autoDownload=options.autoUpdate;
 		autoUpdater.autoInstallOnAppQuit=true;
 		autoUpdater.checkForUpdates();

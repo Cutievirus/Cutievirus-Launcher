@@ -18,11 +18,8 @@ function alertError(err){
 }
 
 // debug keys
+if(mainProcess.options.debug)
 document.addEventListener("keydown",_.debounce(event=>{
-	if(event.key=="F12" && event.shiftKey && v.heart){
-		mainProcess.setDebug();
-	}
-	if(!mainProcess.isDebug()){ return; }
 	if(event.repeat){ return; }
 	switch(event.key){
 	case "F1":
