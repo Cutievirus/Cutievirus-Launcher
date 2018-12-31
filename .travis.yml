@@ -36,4 +36,4 @@ before_cache:
 
 branches:
   except:
-    - "/^v\\d+\\.\\d+\\.\\d+$/"s
+    - "/^v\\d+\\.\\d+\\.\\d+$/"
