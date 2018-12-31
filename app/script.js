@@ -9,7 +9,7 @@ const path = lazy('path');
 const log = mainProcess.log;
 const _ = lazy('lodash');
 
-const {sleep} = require('./utility');
+const {getApiUrl,sleep} = require('./utility');
 
 function alertError(err){
 	//dialog.showErrorBox('',err.stack);
@@ -18,8 +18,11 @@ function alertError(err){
 }
 
 // debug keys
-if(mainProcess.debug)
 document.addEventListener("keydown",_.debounce(event=>{
+	if(event.key=="F12" && event.shiftKey && v.heart){
+		mainProcess.setDebug();
+	}
+	if(!mainProcess.isDebug()){ return; }
 	if(event.repeat){ return; }
 	switch(event.key){
 	case "F1":
@@ -81,7 +84,7 @@ async function loadGames(){
 			if( !game.name ) game.name=game.id;
 		}
 		if(game.repo){
-			game.api=`https://api.github.com/repos/${game.repo}/`;
+			game.api=getApiUrl(game.repo);
 		}
 		if(!game.subdir){ game.subdir=''; }
 		game.version = localStorage.getItem(`cutievirus-version-${game.id}`);

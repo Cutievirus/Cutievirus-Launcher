@@ -8,7 +8,7 @@
   "build": {
     "appId": "com.cutievirus.launcher",
     "productName": "Cutievirus Launcher",
-    "asar": true,
+    "asar": false,
     "mac": {
       "category": "public.app-category.games"
     },
@@ -17,7 +17,24 @@
       "releaseType": "draft",
       "owner": "Cutievirus",
       "repo": "cutievirus-launcher"
-    }
+    },
+    "files": [
+      "package.json",
+      "**/node_modules/**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}",
+      "app/**/*",
+      "!app/**/*-concat/**/*",
+      "!app/**/*{.stylus,.css.map,.js.map}"
+    ]
   },
   "devDependencies": {
     "electron": "^3.0.2",
@@ -34,6 +51,7 @@
     "electron-is-dev": "^1.0.1",
     "electron-updater": "^4.0.0",
     "fs-extra": "^7.0.1",
+    "globby": "^8.0.1",
     "import-lazy": "^3.1.0",
     "lodash": "^4.17.11",
     "request": "^2.88.0",

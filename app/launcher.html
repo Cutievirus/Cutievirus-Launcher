@@ -11,7 +11,10 @@
 <body>
 <div id="vue">
 	<header>
-		<img id="logo" src="favicon.png">
+		<img id="logo" src="favicon.png"
+			@mouseover="heart=true;"
+			@mouseout="heart=false;"
+		>
 		<div id="controls">
             <control-button @click="minimize">-</control-button>
 			<control-button @click="maximize">+</control-button>

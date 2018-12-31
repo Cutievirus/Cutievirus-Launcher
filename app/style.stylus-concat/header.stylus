@@ -20,7 +20,6 @@ header
         width: 5rem
         padding: .5rem 1rem 0
         margin-bottom: -1rem;
-        pointer-events: none
 
 footer 
     background-color: $dark

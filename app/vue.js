@@ -50,6 +50,7 @@ const vue = new Vue({
         game:{},
         lightboxImage:null,
         updaterText:'',
+        heart:false,
     },
     methods:{
         minimize:()=> win.minimize(),

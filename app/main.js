@@ -9,27 +9,13 @@ const lazy = require('import-lazy')(require);
 const fs = lazy('fs-extra');
 const path = lazy('path');
 const downloader = lazy('./downloader');
-const {longMessage} = require('./utility');
+const {longMessage,sleep} = require('./utility');
 const winston = lazy('winston');
 const log = winston;
 exports.log = {};
 for (const level of ['error','warn','info','verbose','debug','silly']){
 	exports.log[level]=(...args)=>log[level](...args);
 }
-
-let options = {
-	audoUpdate:false,
-	debugUpdater: false,
-}
-
-// doesn't work with asar.
-//process.chdir(__dirname);
-
-const dataDirectory = app.getPath("userData");
-const gameDirectory = path.resolve(dataDirectory,'games');
-exports.dataDirectory = dataDirectory;
-exports.gameDirectory = gameDirectory;
-fs.ensureDir(gameDirectory)
 
 winston.configure({
 	level: 'silly',
@@ -54,9 +40,31 @@ winston.configure({
 	]
 });
 
+// doesn't work with asar.
+//process.chdir(__dirname);
 
-const debug = require('electron-is-dev');
-exports.debug=debug;
+let options = {
+	audoUpdate: false,
+	debugUpdater: false,
+	debug: require('electron-is-dev'),
+}
+exports.isDebug=()=>options.debug;
+exports.setDebug=(value=true)=>{
+	options.debug=value;
+}
+
+const dataDirectory = app.getPath("userData");
+const gameDirectory = path.resolve(dataDirectory,'games');
+const appDirectory = path.resolve(app.getAppPath(),'app');
+exports.dataDirectory = dataDirectory;
+exports.gameDirectory = gameDirectory;
+exports.appDirectory = appDirectory;
+fs.ensureDir(gameDirectory)
+
+const package=null;
+fs.readFile(path.resolve(remote.app.getAppPath(),'package.json'))
+.then(data=> package = JSON.parse(data.toString()) )
+.catch(err=>log.error(err));
 
 let launcher;
 
@@ -81,7 +89,7 @@ function openLauncher(){
 
 app.on('ready', ()=>{
 	openLauncher();
-	if(!debug||options.debugUpdater){
+	if(!options.debug||options.debugUpdater){
 		autoUpdater.autoDownload=options.autoUpdate;
 		autoUpdater.autoInstallOnAppQuit=true;
 		autoUpdater.checkForUpdates();
