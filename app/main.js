@@ -17,6 +17,14 @@ for (const level of ['error','warn','info','verbose','debug','silly']){
 	exports.log[level]=(...args)=>log[level](...args);
 }
 
+const dataDirectory = app.getPath("userData");
+const gameDirectory = path.resolve(dataDirectory,'games');
+const appDirectory = path.resolve(app.getAppPath(),'app');
+exports.dataDirectory = dataDirectory;
+exports.gameDirectory = gameDirectory;
+exports.appDirectory = appDirectory;
+fs.ensureDir(gameDirectory);
+
 winston.configure({
 	level: 'silly',
 	format: winston.format.simple(),
@@ -53,18 +61,12 @@ exports.setDebug=(value=true)=>{
 	options.debug=value;
 }
 
-const dataDirectory = app.getPath("userData");
-const gameDirectory = path.resolve(dataDirectory,'games');
-const appDirectory = path.resolve(app.getAppPath(),'app');
-exports.dataDirectory = dataDirectory;
-exports.gameDirectory = gameDirectory;
-exports.appDirectory = appDirectory;
-fs.ensureDir(gameDirectory)
-
-const package=null;
-fs.readFile(path.resolve(remote.app.getAppPath(),'package.json'))
+let package=null;
+fs.readFile(path.resolve(app.getAppPath(),'package.json'))
 .then(data=> package = JSON.parse(data.toString()) )
-.catch(err=>log.error(err));
+.catch(err=>{
+	log.error(err.message);
+});
 
 let launcher;
 
