@@ -18,12 +18,12 @@ const concatTask = (name,pattern,fun)=>gulp.task(name,()=>{
     if(!dirs.length) return gulp.src([]);
     return merge(dirs.map(fun));
 });
-const concatDirectory=(dir)=> concat(dir.match(/[^\/]+(?=-concat)/)[0])
+const concatDirectory=(dir)=> concat(dir.match(/[^\/]+(?=-concat)/)[0]);
 const ignoreConcats = "!app/**/*-concat/**";
 
 const stylusOptions = {
     compress:true
-}
+};
 
 concatTask('stylus-concat',"app/**/*.styl{,us}-concat",dir=>
     gulp.src(dir+'/**/*.styl{,us}')

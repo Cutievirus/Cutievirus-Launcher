@@ -1,6 +1,6 @@
 {
   "name": "cutievirus-launcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Launcher for Cutievirus games.",
   "author": "Dread",
   "license": "UNLICENSED",
@@ -14,7 +14,7 @@
     },
     "publish": {
       "provider": "github",
-      "releaseType": "release",
+      "releaseType": "draft",
       "owner": "Cutievirus",
       "repo": "cutievirus-launcher"
     },

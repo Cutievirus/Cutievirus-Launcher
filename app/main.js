@@ -78,6 +78,7 @@ function openLauncher(){
 		webPreferences:{
 			partition:"persist:cutievirus",
 		},
+		backgroundColor: '#383333',
 	});
 	launcher.loadFile(path.resolve(__dirname,'launcher.html'));
 	launcher.setMenu(null);
