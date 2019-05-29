@@ -3,54 +3,68 @@ $pink = #eaa
 $red = #a94e4e
 
 $column
-    display: flex
-    flex-flow: column
+	display: flex
+	flex-flow: column
 
 $row
-    display: flex
-    flex-flow: row
+	display: flex
+	flex-flow: row
 
 $cover
-    content: ' '
-    position: absolute
-    width: 100%; height: 100%
-    left: 0; top: 0
-    pointer-events: none
+	content: ' '
+	position: absolute
+	width: 100%; height: 100%
+	left: 0; top: 0
+	pointer-events: none
 
 $glass
-    position: relative;
-    &:after
-        @extends $cover
-        background-image:
-        linear-gradient(#fff0 -10%, #fff1 50%,#fff0 50%)
+	position: relative;
+	&:after
+		@extends $cover
+		background-image:
+		linear-gradient(#fff0 -10%, #fff1 50%,#fff0 50%)
 
+$circle-glow
+	position: relative
+	&:after
+		@extends $cover
+		transition: opacity 0.25s
+		opacity 0
+		background:
+			-webkit-radial-gradient(
+			calc(var(--x,0.5)*100%) calc(var(--y,0.5)*100%)
+			, circle, white 40%, transparent );
+	&:hover:after
+		opacity: 0.25
+.oauth-link
+	@extends $circle-glow
 
 @font-face
-    font-family: "teenidle"
-    src: url("fonts/TeenIdle.ttf")
+	font-family: "teenidle"
+	src: url("fonts/TeenIdle.ttf")
 
 @media (min-width: 90rem)
-    html
-        font-size: 1.15vw
+	html
+		font-size: 1.15vw
 
 html, body, #vue
-    height: 100%
-    overflow: hidden
+	height: 100%
+	overflow: hidden
 body
-    margin: 0
-    user-select none
-    box-sizing: border-box
-    font-family: "Trebuchet MS", sans-serif
-    font-size: 1rem
-    border: 0.125rem solid $dark
-    &.maximized
-        border: none
+	margin: 0
+	user-select none
+	box-sizing: border-box
+	font-family: "Trebuchet MS", sans-serif
+	font-size: 1rem
+	border: 0.125rem solid $dark
+	&.maximized
+		border: none
 #vue
-    @extends $column
+	@extends $column
 
 img
-    user-drag: none
-    -webkit-user-drag: none;
+	user-drag: none
+	-webkit-user-drag: none;
 
 [v-cloak]
-    visibility: hidden !important
+	visibility: hidden !important

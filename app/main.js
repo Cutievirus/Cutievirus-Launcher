@@ -9,6 +9,7 @@ const lazy = require('import-lazy')(require);
 const fs = lazy('fs-extra');
 const path = lazy('path');
 const downloader = lazy('./downloader');
+const starmium = lazy('./starmium');
 const {longMessage,sleep} = require('./utility');
 const winston = lazy('winston');
 const log = winston;
@@ -201,3 +202,9 @@ exports.updateGame=Downloader('updateGame');
 exports.isUpdateReady=async function(game){
 	return await downloader.isUpdateReady(game);
 }
+
+exports.openStarmiumWindow=function(){
+	starmium.openWindow();
+}
+
+exports.formatStarmium=s=>starmium.formatStarmium(s);

@@ -1,0 +1,41 @@
+$dark = #383333
+$pink = #eaa
+$red = #a94e4e
+
+
+body
+	margin:0
+	font-family: "Trebuchet MS", sans-serif
+	border: none
+#vue
+	display: block
+.oauth-link, oauth-link
+	display: block
+	color: white
+	background: coral
+	transition: background 1s
+	padding: 1rem
+	font-size: 1.2rem
+	width: 100%
+	height: 3.2rem
+	&+.oauth-link
+		border-top: 2px solid white
+		border-image: linear-gradient(90deg, coral 10%, white 20%, white 80%, coral 90%) 1;
+	&>*
+		pointer-events: none
+	svg
+		width: 2.4rem
+		height: 2.4rem
+		margin-top: -0.5rem
+		vertical-align: text-top
+	svg *
+		fill white
+#welcome
+	padding: 1rem 3rem
+	text-align: center
+	color: $dark
+	svg
+		width: 5rem
+		height: 5rem
+	svg *
+		fill gray

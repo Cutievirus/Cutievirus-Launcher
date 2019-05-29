@@ -5,8 +5,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="lib/vue.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="lib/vue.js"></script>
 </head>
 <body>
 <div id="vue">
@@ -16,19 +16,20 @@
 			@mouseout="heart=false;"
 		>
 		<div id="controls">
-            <control-button @click="minimize">-</control-button>
+			<control-button @click="minimize">-</control-button>
 			<control-button @click="maximize">+</control-button>
 			<control-button @click="close">×</control-button>
 		</div>
+		<starmium-count v-if="games.length>0" :starmium='starmium'></starmium-count>
 	</header>
 	<div id="content">
 		<aside>
 			<nav>
-                <game-button
-                    v-for="game in games"
-                    :game=game
-                    :key=game.id
-                />
+				<game-button
+					v-for="game in games"
+					:game=game
+					:key=game.id
+				/>
 			</nav>
 			<div id="version" v-text="version"></div>
 		</aside>
@@ -78,7 +79,7 @@
 			<div id="loadtext" v-text="`Loading... Please wait.`"></div>
 		</div>
 	</div>
-    <footer v-html="updaterText"></footer>
+	<footer v-html="updaterText"></footer>
 </div>
 <script src="script.js"></script>
 <script src="vue.js"></script>

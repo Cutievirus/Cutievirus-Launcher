@@ -42,8 +42,8 @@ gulp.task('stylus',()=>
     .pipe(gulp.dest('app'))
 );
 
-gulp.task('watch', ['stylus', 'stylus-concat'], ()=>{
-    gulp.watch(["app/**/*.styl{,us}",ignoreConcats],['stylus']);
-    gulp.watch("app/**/*.styl{,us}-concat/**/*.styl{,us}",['stylus-concat']);
+gulp.task('watch', gulp.series(gulp.parallel('stylus', 'stylus-concat'), ()=>{
+    gulp.watch(["app/**/*.styl{,us}",ignoreConcats],gulp.series('stylus'));
+    gulp.watch("app/**/*.styl{,us}-concat/**/*.styl{,us}",gulp.series('stylus-concat'));
 
-});
+}));

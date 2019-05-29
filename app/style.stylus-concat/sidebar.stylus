@@ -1,70 +1,61 @@
 
 aside
-    color: white
-    text-shadow: .0625em .0625em .125em $red
-    background-color: $pink
-    padding: 1rem
-    width: 13.2rem
-    font-family: teenidle 
-    font-size: 1.3rem
-    flex-shrink: 0
-    overflow-y: auto
-    &::-webkit-scrollbar
-        width: 0.6rem
-    &::-webkit-scrollbar-thumb
-        box-shadow: inset 0.35rem 0 lighten($pink,10)
-    @media (max-width: 50rem)
-        padding: 0.5em
-        width: 28%
-    @media (max-width: 40rem)
-        padding: 0
-    nav 
-        border-radius: 0.25rem
-        overflow: hidden
-        .game-button
-            display: block
-            text-align: center
-            padding: 1rem 0
-            position: relative
-            z-index: 1
-            overflow: hidden
-            &:after
-                @extends $cover
-                transition: opacity 0.25s
-                opacity 0
-                background:
-                    -webkit-radial-gradient(
-                    calc(var(--x,0.5)*100%) calc(var(--y,0.5)*100%)
-    	            , circle, white 40%, transparent );
-            &:hover:after
-                opacity: 0.25
-            &.selected:after
-                opacity 0.25
-                background: white
-            & + .game-button
-                border-top: 0.0625rem solid white 
-            img // game icon
-                width: 30%
-                float: left
-                margin-top: -1rem
-                pointer-events: none
-            span 
-                pointer-events: none
-            @media (max-width: 40rem)
-                font-size: 0.9em;
-                img
-                    display: none;
-                &[data-icon=true]:before
-                    background: var(--icon) no-repeat
-                    background-size: contain
-                    background-blend-mode: soft-light
-                    background-color: $pink
-                    @extends $cover
-                    z-index: -1
-                    opacity: 0.5
-    #version
-        font-family: Consolas,monospace
-        font-size: 0.75rem
-        color: #fffa
-        position:absolute
-        bottom:0
+	color: white
+	text-shadow: .0625em .0625em .125em $red
+	background-color: $pink
+	padding: 1rem
+	width: 13.2rem
+	font-family: teenidle 
+	font-size: 1.3rem
+	flex-shrink: 0
+	overflow-y: auto
+	&::-webkit-scrollbar
+		width: 0.6rem
+	&::-webkit-scrollbar-thumb
+		box-shadow: inset 0.35rem 0 lighten($pink,10)
+	@media (max-width: 50rem)
+		padding: 0.5em
+		width: 28%
+	@media (max-width: 40rem)
+		padding: 0
+	nav 
+		border-radius: 0.25rem
+		overflow: hidden
+		.game-button
+			display: block
+			text-align: center
+			padding: 1rem 0
+			position: relative
+			z-index: 1
+			overflow: hidden
+			@extends $circle-glow
+			&.selected:after
+				opacity 0.25
+				background: white
+			& + .game-button
+				border-top: 0.0625rem solid white 
+			img // game icon
+				width: 30%
+				float: left
+				margin-top: -1rem
+				pointer-events: none
+			span 
+				pointer-events: none
+			@media (max-width: 40rem)
+				font-size: 0.9em;
+				img
+					display: none;
+				&[data-icon=true]:before
+					background: var(--icon) no-repeat
+					background-size: contain
+					background-blend-mode: soft-light
+					background-color: $pink
+					@extends $cover
+					z-index: -1
+					opacity: 0.5
+	#version
+		font-family: Consolas,monospace
+		font-size: 0.75rem
+		color: #fffa
+		position:absolute
+		bottom:0
