@@ -1,6 +1,7 @@
 $dark = #383333
 $pink = #eaa
 $red = #a94e4e
+$starmium-red = #e75454
 
 $column
 	display: flex
