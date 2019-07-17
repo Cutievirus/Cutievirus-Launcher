@@ -160,6 +160,7 @@ function openGameWindow(game){
 		webPreferences:{
 			nodeIntegration: false,
 			partition:game.session||game.id,
+			preload:path.resolve(__dirname,'preload.js'),
 		},
 
 	});
@@ -204,7 +205,15 @@ exports.isUpdateReady=async function(game){
 }
 
 exports.openStarmiumWindow=function(){
-	starmium.openWindow();
+	starmium.openWindow().then(()=>{
+		if(!launcher){ return; }
+		launcher.webContents.send('update-starmium');
+	},()=>{});
 }
 
 exports.formatStarmium=s=>starmium.formatStarmium(s);
+
+Object.defineProperty(exports,'starmium',{
+	get(){ return starmium.starmium_count; },
+	set(v) { starmium.starmium_count=v; },
+});

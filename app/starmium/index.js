@@ -1,5 +1,6 @@
 const {
 	BrowserWindow,
+	//ipcMain:ipc,
 } = require('electron');
 const log = require('winston');
 const path = require('path');
@@ -7,6 +8,9 @@ const http = require('http');
 const server = http.createServer((request,response)=>{
 	response.write("Hello World");
 	response.end();
+	if(win){
+		win.webContents.send('http-request',request.url);
+	}
 });
 server.on('error',err=>{
 	log.error(err);
@@ -18,10 +22,10 @@ let win;
 let port;
 exports.getPort=()=>port;
 
-exports.openWindow=openWindow;
-function openWindow(){
+exports.openWindow=()=>new Promise((resolve,reject)=>{
 	if(win){
 		win.focus();
+		reject();
 		return;
 	}
 	server.listen(0);
@@ -33,6 +37,7 @@ function openWindow(){
 		icon: path.resolve(__dirname,'../favicon.png'),
 		webPreferences:{
 			//nodeIntegration: false,
+			partition:"persist:cutievirus",
 		},
 	});
 	win.loadFile(path.resolve(__dirname,'index.html'));
@@ -41,15 +46,19 @@ function openWindow(){
 	win.on('closed',()=>{
 		win=null;
 		server.close();
+		resolve();
 	});
-	win.webContents.on('will-navigate', (event, url)=>{
-		if(url.startsWith("http://cutievirus.com/oauth/")){
-			win.close();
-		}
-	});
-}
+});
 
 exports.formatStarmium=formatStarmium;
 function formatStarmium(s){
-	return `${Math.floor(s)}.${Math.floor(s*10%10)}.${String(Math.floor(s*1000%100)).padStart(2,0)}`;
+	const sign=s<0?'-':'';
+	s=Math.abs(s);
+	return `${sign}${Math.floor(s)}.${Math.floor(s*10%10)}.${String(Math.floor(s*1000%100)).padStart(2,0)}`;
 }
+
+let _starmium_count=0;
+Object.defineProperty(exports,'starmium_count',{
+	get(){ return _starmium_count; },
+	set(v) { _starmium_count=v; },
+});

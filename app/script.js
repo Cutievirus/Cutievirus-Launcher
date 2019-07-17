@@ -217,3 +217,34 @@ function quitMessage(){
 ipc.on('updaterText',(event,text)=>{
 	v.updaterText = text;
 });
+
+ipc.on('update-starmium',async (event)=>{
+	try{
+		// get itchio access_token
+		const access_token = localStorage.getItem('itchio_access_token');
+		if(!access_token){ return; }
+		// get itchio user id
+		const user=(await (await fetch(`https://itch.io/api/1/${access_token}/me`)).json()).user;
+		localStorage.setItem('itchio_userid',user.id);
+		// get starmium
+		getStarmium();
+	}catch(err){
+		// Something went wrong.
+		log.error(err);
+	}
+
+});
+
+async function getStarmium(){
+	const userid = localStorage.getItem('itchio_userid');
+	if(!userid){ return; }
+	try{
+		const starmium=(await (await fetch(`http://gameserver.cutievirus.com/starmium/${user.id}`)).json()).starmium;
+		v.starmium=starmium;
+		localStorage.setItem('starmium',starmium);
+	}catch(err){
+		log.error(err);
+	}
+	
+}
+getStarmium();

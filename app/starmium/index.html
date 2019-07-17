@@ -21,17 +21,6 @@
 			Waiting for response from {{provider}}...
 		</p>
 	</div>
-	
-	<oauth-link
-	href="https://itch.io/user/oauth?client_id=1e631368d8f57f0b2eac9cca0f7fdf7f&scope=profile%3Ame&response_type=token&redirect_uri=http%3A%2F%2Fstarmium.cutievirus.com%2F%3Fprovider%3Ditch.io"
-	svg="../img/itchio.svg"
-	text="itch.io"
-	></oauth-link>
-	<oauth-link
-	href="https://www.patreon.com/oauth2/authorize?response_type=code&client_id=qdkAZJfRdKQTRXwsOh7T5Fhr5xz68dvtPhhC1fc_TuBrPPZyJQBPiRnSs6WEOGqX&redirect_uri=http%3A%2F%2Fstarmium.cutievirus.com%2F%3Fprovider%3Dpatreon"
-	svg="../img/patreon.svg"
-	text="Patreon"
-	></oauth-link>
 	<footer id="footer"></footer>
 </div>
 <script>
@@ -51,39 +40,13 @@
 			content:'',
 		}},
 	});
-	Vue.component('oauth-link',{
-		props: ['href','svg','text'],
-		template: //html
-		`<button class='oauth-link'
-		v-if='!$root.provider'
-		@click='click'
-		@mousemove='mousemove'
-		><inline-svg :data="svg"></inline-svg>{{text}}</button>`,
-		data(){return{
-			link:this.href+`&state=${this.$root.port}`,
-		}},
-		methods:{
-			async click(e){
-				this.$root.provider=this.text;
-				this.$root.svg=this.svg;
-				shell.openExternal(this.link);
-				await Vue.nextTick();
-				resetWindowSize();
-			},
-			mousemove(e){
-				if(e.target!==this.$el){ return; }
-				e.target.style.setProperty('--x',e.offsetX/e.target.offsetWidth);
-				e.target.style.setProperty('--y',e.offsetY/e.target.offsetHeight);
-			},
-		}
-	});
 
 	const vue = new Vue({ 
 		el:'#vue',
 		data:{
 			port:mainProcess.getPort(),
-			provider:null,
-			svg:null,
+			provider:"itch.io",
+			svg:"../img/itchio.svg",
 		}
 	});
 
@@ -95,6 +58,24 @@
 		const height = Math.floor(bounds.y+bounds.height+window.pageYOffset);
 		win.setContentSize(win.getContentSize()[0],Math.min(height,defaultWindowHeight));
 	}
+
+	const itchio_link="https://itch.io/user/oauth?client_id=1e631368d8f57f0b2eac9cca0f7fdf7f&scope=profile%3Ame&response_type=token&redirect_uri=http%3A%2F%2Fcutievirus.com%2F%23oauth%3Ditch.io";
+	shell.openExternal(`${itchio_link}&state=${vue.$data.port}`);
+
+	function getLocationParameters(s){
+		const r = /[?&#]([^?&#=\r\n]+)=([^?&#=\r\n]+)/g;
+		const p={};let m;while(m=r.exec(s)){ p[m[1]]=m[2]; }
+		return p;
+	}
+
+	ipc.on('http-request',(event,url)=>{
+		const params = getLocationParameters(url);
+		if(params.provider=='itch.io'){
+			localStorage.setItem('itchio_access_token',params.access_token);
+			win.close();
+			//ipc.send('close-starmium-window');
+		}
+	});
 </script>
 </body>
 </html>
